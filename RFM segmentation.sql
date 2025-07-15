@@ -1,5 +1,3 @@
-select * from sales_data;
-create view RFM_customer_Analysis as
 with  customer_aggregated_data as
 (
 select CUSTOMERNAME,
@@ -26,15 +24,16 @@ M_score,
 concat_ws('',R_score,F_score,M_score) as rfm_score_combination
 from rfm_score as r;
 
-SELECT
+SELECT 
     CUSTOMERNAME,
     CASE
-        WHEN rfm_score_combination IN (111, 112, 121, 132, 211, 211, 212, 114, 141) THEN 'CHURNED CUSTOMER'
-        WHEN rfm_score_combination IN (133, 134, 143, 24, 334, 343, 344, 144) THEN 'SLIPPING AWAY, CANNOT LOSE'
-        WHEN rfm_score_combination IN (311, 411, 331) THEN 'NEW CUSTOMERS'
-        WHEN rfm_score_combination IN (222, 231, 221, 223, 233, 322) THEN 'POTENTIAL CHURNERS'
-        WHEN rfm_score_combination IN (323, 333, 321, 341, 422, 332, 432) THEN 'ACTIVE'
-        WHEN rfm_score_combination IN (433, 434, 443, 444) THEN 'LOYAL'
+        WHEN rfm_score_combination IN (111 , 112, 121, 132, 211, 211, 212, 114, 141) THEN 'CHURNED CUSTOMER'
+        WHEN rfm_score_combination IN (133 , 134, 143, 24, 334, 343, 344, 144) THEN 'SLIPPING AWAY, CANNOT LOSE'
+        WHEN rfm_score_combination IN (311 , 411, 331) THEN 'NEW CUSTOMERS'
+        WHEN rfm_score_combination IN (222 , 231, 221, 223, 233, 322) THEN 'POTENTIAL CHURNERS'
+        WHEN rfm_score_combination IN (323 , 333, 321, 341, 422, 332, 432) THEN 'ACTIVE'
+        WHEN rfm_score_combination IN (433 , 434, 443, 444) THEN 'LOYAL'
         ELSE 'CANNOT BE DEFINED'
     END AS CUSTOMER_SEGMENT
-FROM RFM_customer_Analysis;
+FROM
+    RFM_customer_Analysis;
